@@ -14,6 +14,10 @@ conn = pypyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=
 cursor = conn.cursor()
 
 # --------- Functions ---------
+def log(data):
+    print(data)
+def clean():
+    os.system('cls' if os.name == 'nt' else 'clear')
 def loadJSON():
     with open('tables.json', 'r') as f:
         tables_dict = json.load(f)
@@ -22,10 +26,6 @@ def loadJSON():
             keys.append(x)
         print(tables_dict)
     return tables_dict
-def log(data):
-    print(data)
-def clean():
-    os.system('cls' if os.name == 'nt' else 'clear')
 def convertDate(date):
     date=date.split("/")
     Day = date[1].zfill(2)
