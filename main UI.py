@@ -1,5 +1,5 @@
 # --------- Imports ---------
-import pyodbc
+import pypyodbc
 import random
 import os
 import json
@@ -10,7 +10,7 @@ namesUsed=[]
 keys=[]
 tables_dict={}
 # --------- Link Access Driver  ---------
-conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\Libarys\Documents\Microsoft Access\Test Database.accdb;')
+conn = pypyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=D:\Libarys\Documents\Microsoft Access\Test Database.accdb;')
 cursor = conn.cursor()
 
 # --------- Functions ---------
