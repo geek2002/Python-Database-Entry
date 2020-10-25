@@ -1,0 +1,6 @@
+{
+    "customer": ["customer_title","customer_fname","customer_lname","customer_gender","customer_dob","customer_postcode","customer_city","customer_email"],
+    "card": ["card_number","card_expary","card_cvv"],
+    "sale": ["sale_value","staff_id","sale_data","sale_time"],
+    "staff": ["staff_title","staff_fname","staff_lname","staff__gender","staff_dob","staff_postcode","staff_salary","staff_phoneNumber","staff_contractedHours","staff_startData"]
+}
