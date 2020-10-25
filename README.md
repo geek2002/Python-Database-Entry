@@ -1,4 +1,4 @@
 # Python Database Entry
 ## Requirements
-Libary: pyodbc
-Installation: pip install pyodbc
+### Libary: pyodbc
+#### Installation: pip install pyodbc
