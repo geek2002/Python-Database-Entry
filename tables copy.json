@@ -2,5 +2,9 @@
     "customer":{
         "feilds": ["customer_title","customer_fname","customer_lname","customer_gender","customer_dob","customer_postcode","customer_city","customer_email"],
         "dataTypes":["VARCHAR(3)","VARCHAR(10)","VARCHAR(10)","VARCHAR(1)","DATETIME","VARCHAR(7)","VARCHAR(10)","VARCHAR(128)"]
-    }
+    },
+    "card":{
+        "feilds":["card_number","card_expary","card_cvv"],
+        "dataTypes":["DOUBLE","DATETIME","SHORT"]
+    } 
 }
