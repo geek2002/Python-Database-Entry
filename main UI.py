@@ -34,6 +34,22 @@ def convertDate(date):
     Year = date [2].zfill(2)
     date = Day + "/" + Month + "/" + Year
     return date
+def createTable():
+    sql="CREATE TABLE"
+    for x in tables_dict:
+        sql=sql + " " + x + " (" + x + "_id AUTOINCREMENT PRIMARY KEY,"
+        feilds=tables_dict[x]["feilds"]
+        dataTypes=tables_dict[x]["dataTypes"]
+        y=0
+        for y in range(len(feilds)):
+            if y != (len(feilds)-1):
+                sql=sql + feilds[y] + " " + dataTypes[y] + " , "
+            else:
+                sql=sql + " " + feilds[y] + " " + dataTypes[y] + ") "
+        cursor.execute(sql)
+        print(sql)
+        sql="CREATE TABLE"
+        conn.commit()
 def addNames(ammount):
     keysIndex=0
     z=0
