@@ -73,7 +73,6 @@ def writeToDatabase(tableIndex,data,commit=False):
     feilds=seperator.join(feildNames)
     values=seperator.join(data)
     sql="INSERT INTO " + table + "(" + feilds + ") VALUES(" + values + ")" 
-    cursor = conn.cursor()
     cursor.execute(sql)
     if commit:
         conn.commit()
