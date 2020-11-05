@@ -9,42 +9,18 @@ cardsUsed=[]
 namesUsed=[]
 keys=[]
 tables_dict={}
-
-# --------- Check Files  ---------
-def changeLocation():
-    print("Database File Not Found")
-    print("Please enter Database File Location")
-    databaseFile=input(">> ")
-    locaFile=open("databaseLocation.txt","w")
-    locaFile.write(databaseFile)
-    locaFile.close()
-    return databaseFile
-
-if os.path.exists("databaseLocation.txt"):
-    file=open("databaseLocation.txt","r")
-    databaseFile=file.readlines()[0]
-    file.close()
-    fileExists = os.path.exists(databaseFile)
-    if fileExists == False:
-        changeLocation()
-else:
-    databaseFile=changeLocation()
-
-
-# --------- Link Access Driver  ---------
-conn = pypyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ='+databaseFile+';')
-cursor = conn.cursor()
-
+functionality = 0
+func=["None","Limited","Full"]
 # --------- Functions ---------
 def Menu():
-    print("")
-    print("╔═══════════════════════════════════════╗")
-    print("║          1:Enter Names                ║")
-    print("║          2:Enter Cards                ║")
-    print("║          3:Enter Sales                ║")
-    print("║          4:Get Tables                 ║")
-    print("║          5:Exit                       ║")
-    print("╚═══════════════════════════════════════╝")
+    log("Functionality: " + func[functionality])
+    log("╔═══════════════════════════════════════╗")
+    log("║          1:Enter Names                ║")
+    log("║          2:Enter Cards                ║")
+    log("║          3:Enter Sales                ║")
+    log("║          4:Get Tables                 ║")
+    log("║          5:Exit                       ║")
+    log("╚═══════════════════════════════════════╝")
     do=input("> ")
     if do == "1":
         clean()
@@ -60,7 +36,7 @@ def Menu():
     elif do == "5":
         exit()
     else:
-        print("Error , Please only use 1,2,3 or 4")
+        log("Error , Please only use 1,2,3 or 4")
         Menu()
 def log(data):
     print(data)
@@ -92,7 +68,7 @@ def createTable():
             else:
                 sql=sql + " " + feilds[y] + " " + dataTypes[y] + ") "
         cursor.execute(sql)
-        print(sql)
+        log(sql)
         sql="CREATE TABLE"
         conn.commit()
 def addNames(ammount):
@@ -137,31 +113,25 @@ def writeToDatabase(tableIndex,data,commit=False):
     cursor.execute(sql)
     if commit:
         conn.commit()
-def testPyodbc():
-    try:
-        import pyodbc
-        libary = True
-    except ModuleNotFoundError:
-        print("pyodbc libary not installed please run 'pip install pyodbc' to install")
-        libary = False
-    
-    try:
-        pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ='+databaseFile+';')
-        driver = True
-    except pyodbc.InterfaceError:
-        print("Driver Error")
-        print("Unable to create tables automatically")
-        print("Please create tables manually")
-        driver=False
-    except pyodbc.Error:
-        if os.path.exists(databaseFile):
-            print("Unknown Error Occured")
-            driver=False
-            
-        else:
-            print("File Not Found")
-            driver=False
-    return libary,driver
+def changeLocation():
+    log("Database File Not Found")
+    log("Please enter Database File Location")
+    databaseFile=input(">> ")
+    locaFile=open("databaseLocation.txt","w")
+    locaFile.write(databaseFile)
+    locaFile.close()
+    return databaseFile
+def getDatabaseLocation():
+    if os.path.exists("databaseLocation.txt"):
+        file=open("databaseLocation.txt","r")
+        databaseFile=file.readlines()[0]
+        file.close()
+        fileExists = os.path.exists(databaseFile)
+        if fileExists == False:
+            changeLocation()
+    else:
+        databaseFile=changeLocation()
+    return databaseFile 
 def getTables():
     curs = conn.cursor()
     tables = []
@@ -169,10 +139,62 @@ def getTables():
         tableName=row.table_name
         if "MS" not in tableName:
             tables.append(tableName)
-            print(row.table_name)
+            log(row.table_name)
     cursor.close()
     return tables
-    
+
+def installModule(moduleName):
+    os.system("pip install " + moduleName)
+def testPyodbc(databaseLocation):
+    try:
+        import pyodbc
+        log("Libary: OK")
+    except ModuleNotFoundError:
+        log("Unable to import Module")
+        log("Reason: Module Not found")
+        input("Press <Enter> to install")
+        installModule("pyodbc")
+        testPyodbc(databaseLocation)
+    try:
+        pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ='+databaseLocation+';')
+        log("Driver: OK")
+        functionality= 2
+    except pyodbc.InterfaceError:
+        log("Driver Error")
+        log("Unable to user pyodbc resorting to backup libary (pypyodbc) limited functionality")
+        functionality = testPypyodbc(databaseLocation)
+    except pyodbc.Error:
+        if os.path.exists(databaseLocation):
+            log("An Unknown Error occured, Please Try Again")
+        else:
+            log("File Not Found, change file location and try again")
+    return functionality
+def testPypyodbc(databaseLocation):
+    try:
+        import pypyodbc
+        log("Libary: OK")
+        functionality= 1
+    except ModuleNotFoundError:
+        log("Unable to import Module")
+        log("Reason: Module Not found")
+        input("Press <Enter> to install")
+        installModule("pypyodbc")
+        testPypyodbc(databaseLocation)
+    return functionality
+
+databaseFile=getDatabaseLocation()
+functionality = testPyodbc(databaseFile)
+
+# --------- Link Access Driver  ---------
+if functionality == 2:
+    import pyodbc
+    conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ='+databaseFile+';')
+elif functionality == 1:
+    import pypyodbc
+    conn = pypyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ='+databaseFile+';')
+else:
+    log("An error has accured please try again, if this error continues please report on github")
+cursor = conn.cursor()
 
 tables_dict=loadJSON()
 Menu()
