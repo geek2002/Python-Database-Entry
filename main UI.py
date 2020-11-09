@@ -17,7 +17,7 @@ def Menu():
     log("║          1:Enter Names                ║")
     log("║          2:Enter Cards                ║")
     log("║          3:Enter Sales                ║")
-    log("║          4:Get Tables                 ║")
+    log("║          4:Add Tables                 ║")
     log("║          5:Exit                       ║")
     log("╚═══════════════════════════════════════╝")
     do=input("> ")
@@ -28,10 +28,10 @@ def Menu():
         clean()
         Menu()
     elif do == "3":
-        clean()
+        clean() 
         Menu()
     elif do == "4":
-        getTables()
+        addTables()
     elif do == "5":
         exit()
     else:
@@ -39,6 +39,10 @@ def Menu():
         Menu()
 def log(data):
     print(data)
+    # file=open("Log.txt","a")
+    # file.write(str(data))
+    # file.write("\n")
+    # file.close()
 def clean():
     os.system('cls' if os.name == 'nt' else 'clear')
 def loadJSON():
@@ -138,10 +142,31 @@ def getTables():
         tableName=row.table_name
         if "MS" not in tableName:
             tables.append(tableName)
-            log(row.table_name)
     cursor.close()
     return tables
-
+def addTables():
+    currentTables=getTables()
+    alreadyMade=[]
+    for x in keys:
+        if x in currentTables:
+            alreadyMade.append(x)
+    log("Table(s) [" + ",".join(alreadyMade) + "] already in database, do you want to delete them (Y/N)")
+    while True:
+        delete=input(">> ")
+        delete=delete.upper()[0]
+        print(delete)
+        if delete=="Y":
+            delTable()
+            break
+        elif delete=="N":
+            # Redirect somewhere else
+            x=0
+            break
+        else:
+            log("Please only user Y or N")
+def delTable():
+    x=0
+    # Delete Tables
 def installModule(moduleName):
     os.system("pip install " + moduleName)
 def testPyodbc(databaseLocation):
