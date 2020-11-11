@@ -1,4 +1,4 @@
 # Python Database Entry
 ## Requirements
-##### Python
-##### Internet Connection
+##### Libary: pypyodbc
+##### Installation: pip install pypyodbc
