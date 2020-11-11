@@ -90,6 +90,7 @@ def addNames(ammount):
         items=line.split(",")
         
         items[4] = items[4].upper()[0]
+        items[5] = convertDate(items[5])
         items[8] = items[8][0:len(items[8])-1]
         x=0
         for x in range(len(items)):
@@ -135,11 +136,13 @@ def getDatabaseLocation():
         databaseFile=changeLocation()
     return databaseFile 
 def getTables():
+    curs = conn.cursor()
     tables = []
-    for row in cursor.tables():
+    for row in curs.tables():
         tableName=row.table_name
         if "MS" not in tableName:
             tables.append(tableName)
+    cursor.close()
     return tables
 def addTables():
     currentTables=getTables()
@@ -153,9 +156,7 @@ def addTables():
         delete=delete.upper()[0]
         print(delete)
         if delete=="Y":
-            for table in alreadyMade:
-                delTable(table)
-            conn.commit()
+            delTable()
             break
         elif delete=="N":
             # Redirect somewhere else
@@ -163,25 +164,21 @@ def addTables():
             break
         else:
             log("Please only user Y or N")
-def delTable(tableName):
-    sql="DROP TABLE " + tableName + ";"
-    print(sql)
-    cursor.execute(sql)
-    
+def delTable():
+    x=0
+    # Delete Tables
 def installModule(moduleName):
     os.system("pip install " + moduleName)
 def testPyodbc(databaseLocation):
-    while True:
-        try:
-            import pyodbc
-            log("Libary: OK")
-            break
-        except ModuleNotFoundError:
-            log("Unable to import Module")
-            log("Reason: Module Not found")
-            input("Press <Enter> to install")
-            installModule("pyodbc")
-            
+    try:
+        import pyodbc
+        log("Libary: OK")
+    except ModuleNotFoundError:
+        log("Unable to import Module")
+        log("Reason: Module Not found")
+        input("Press <Enter> to install")
+        installModule("pyodbc")
+        testPyodbc(databaseLocation)
     try:
         pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ='+databaseLocation+';')
         log("Driver: OK")
