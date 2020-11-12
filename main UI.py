@@ -217,7 +217,7 @@ if functionality == 2:
     conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ='+databaseFile+';')
 elif functionality == 1:
     import pypyodbc
-    conn = pypyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ='+databaseFile+';')
+    conn = pypyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\Users\577171\Documents\Database1.accdb;')
 else:
     log("An error has accured please try again, if this error continues please report on github")
 cursor = conn.cursor()
