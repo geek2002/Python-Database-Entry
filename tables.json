@@ -1,6 +1,71 @@
 {
-    "customer": ["customer_title","customer_fname","customer_lname","customer_gender","customer_dob","customer_postcode","customer_city","customer_email"],
-    "card": ["card_number","card_expary","card_cvv"],
-    "sale": ["sale_value","staff_id","sale_data","sale_time"],
-    "staff": ["staff_title","staff_fname","staff_lname","staff__gender","staff_dob","staff_postcode","staff_salary","staff_phoneNumber","staff_contractedHours","staff_startData"]
+  "customer": [
+    "cust_id",
+    "cust_fname",
+    "cust_lname",
+    "cust_email",
+    "cust_phone",
+    "cust_mobile",
+    "cust_addr1",
+    "cust_addr2",
+    "cust_post",
+    "cust_town"
+  ],
+  "supplier":[
+      "supply_id",
+      "supply_name",
+      "supply_number",
+      "supply_addr1",
+      "supply_addr2",
+      "supply_postcode"
+  ],
+  "staff":[
+      "staff_id",
+      "staff_fname",
+      "staff_lname",
+      "staff_email",
+      "staff_mobile",
+      "staff_role",
+      "staff_addr1",
+      "staff_addr2",
+      "staff_postcode",
+      "staff_town"
+  ],
+  "sale":[
+      "sale_id",
+      "sale_time",
+      "sale_date",
+      "sale_value",
+      "sale_quantity",
+      "cust_id",
+      "staff_id",
+      "card_id"
+  ],
+  "catagory":[
+      "cata_id",
+      "cata_name"
+  ],
+  "product":[
+    "prod_id",
+    "prod_name",
+    "prod_description",
+    "prod_price",
+    "prod_RRP",
+    "prod_weight",
+    "cata_id",
+    "supply_id"
+  ],
+  "card":[
+      "card_id",
+      "card_number",
+      "card_exipary",
+      "card_cvv",
+      "cust_id"
+  ],
+  "sale_product":[
+      "sale_product_id",
+      "sale_id",
+      "prod_id"
+  ]
+      
 }
