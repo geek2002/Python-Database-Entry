@@ -31,5 +31,52 @@ def checkLineLengths():
         if len(row) != 9:
             errors.append(row[0])
     print(errors)
-#checkLineLengths()
-formatCSV()
+def changePhoneNumbers():
+    f=open("Names.csv", encoding='utf-8-sig')
+    n=open("Names New.csv","a", encoding='utf-8-sig')
+    lines = f.readlines()
+
+    for line in lines:
+        row=line.split(",")
+        number=row[5]
+        number=number[1:(len(number)-1)]
+        number=number.replace(" ", "")
+        number=[number[0:5],number[4:10]]
+        number=number[0] + " " + number[1]
+        row[5]=number
+
+        num=int(row[0])/1000
+        print("Phone Number Check: "+ str(num)[0:4] + " %")
+
+
+        line=",".join(row)
+        n.write(line)
+    n.close()
+
+def formatCapitals():
+    f=open("Names.csv", encoding='utf-8-sig')
+    n=open("Names New.csv","a", encoding='utf-8-sig')
+    lines = f.readlines()
+
+    for line in lines:
+        row=line.split(",")
+        city=row[8]
+        city=city.replace('"','')
+        words=city.split()
+        wordsTmp=[]
+        for word in words:
+            word=word.capitalize()
+            wordsTmp.append(word)
+        words=" ".join(wordsTmp)
+        city=words
+        num=int(row[0])/1000
+        print("City Check: "+ str(num)[0:4] + " %")
+        
+        row[8]=city
+        line=",".join(row)
+        n.write(line + "\n")
+    n.close()
+# checkLineLengths()
+# changePhoneNumbers()
+formatCapitals()
+# Number,GivenName,Surname,EmailAddress,TelephoneCountryCode,TelephoneNumber,StreetAddress,ZipCode,City
