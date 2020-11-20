@@ -223,4 +223,5 @@ else:
 cursor = conn.cursor()
 
 tables_dict=loadJSON()
+print(tables_dict)
 Menu()
