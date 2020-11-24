@@ -1,15 +1,12 @@
 {
   "customer": [
-    "cust_id",
     "cust_fname",
     "cust_lname",
     "cust_email",
-    "cust_phone",
-    "cust_phonecode",
+    "cust_countrycode",
     "cust_mobile",
     "cust_addr1",
-    "cust_addr2",
-    "cust_post",
+    "cust_postcode",
     "cust_town"
   ],
   "supplier":[
