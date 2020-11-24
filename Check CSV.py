@@ -76,7 +76,20 @@ def formatCapitals():
         line=",".join(row)
         n.write(line + "\n")
     n.close()
+def removeNewLine():
+    f=open("Names.csv", encoding='utf-8-sig')
+    n=open("Names New.csv","a", encoding='utf-8-sig')
+    lines = f.readlines()
+
+    for line in lines:
+        row=line.split(",")
+        rowlen=len(row)
+        row[rowlen-1] = row[rowlen-1].replace("\n","")
+        print(row[rowlen-1])
+        line=",".join(row)
+        n.write(line)
+    n.close()
 # checkLineLengths()
 # changePhoneNumbers()
-formatCapitals()
-# Number,GivenName,Surname,EmailAddress,TelephoneCountryCode,TelephoneNumber,StreetAddress,ZipCode,City
+# formatCapitals()
+removeNewLine()
