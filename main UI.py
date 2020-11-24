@@ -88,25 +88,24 @@ def addNames(ammount):
             else:
                 x=1
         items=line.split(",")
-        
-        items[4] = items[4].upper()[0]
-        items[8] = items[8][0:len(items[8])-1]
         x=0
         for x in range(len(items)):
             items[x]= "'" + items[x] + "'"
         namesUsed.append(items[0])
         items.remove(items[0])
-        log(str(z) + "- Adding: " + items[2] + items[3])
-        writeToDatabase(keysIndex,items)
+        log(str(z) + "- Adding: " + items[0] + items[1])
+        itemslen=len(items)-1
+        items[itemslen] = items[itemslen].replace("\n","")
+        
         if z % 100 == True:
             writeToDatabase(keysIndex,items,True)
+        elif z != (ammount-1):
+            writeToDatabase(keysIndex,items)
     writeToDatabase(keysIndex,items,True)
 def writeToDatabase(tableIndex,data,commit=False):
     table=keys[tableIndex]
     feildNames=tables_dict[table]
-    feildLen=len(feildNames)
-    dataLen=len(data)
-    if feildLen != dataLen:
+    if len(feildNames) != len(data):
         log("Feild and data lists are not the same length. Exiting")
     seperator = ","
     feilds=seperator.join(feildNames)
@@ -223,5 +222,6 @@ else:
 cursor = conn.cursor()
 
 tables_dict=loadJSON()
-print(tables_dict)
+
+print(tables_dict["customer"])
 Menu()
