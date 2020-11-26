@@ -89,16 +89,18 @@ def removeNewLine():
         line=",".join(row)
         n.write(line)
     n.close()
-def delteRow(row):
+def delteRow(rowIndex):
     f=open("Names.csv", encoding='utf-8-sig')
     n=open("Names New.csv","a", encoding='utf-8-sig')
     lines = f.readlines()
 
     for line in lines:
         row=line.split(",")
-        print(row)
-        row.pop(4)
-        print(row)
+        row.pop(rowIndex)
+
+        num=int(row[0])/1000
+        print("Deleting row " + str(rowIndex) + ": "+ str(num)[0:4] + " %")
+
         line=",".join(row)
         n.write(line)
     n.close()
