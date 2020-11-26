@@ -89,7 +89,21 @@ def removeNewLine():
         line=",".join(row)
         n.write(line)
     n.close()
+def delteRow(row):
+    f=open("Names.csv", encoding='utf-8-sig')
+    n=open("Names New.csv","a", encoding='utf-8-sig')
+    lines = f.readlines()
+
+    for line in lines:
+        row=line.split(",")
+        print(row)
+        row.pop(4)
+        print(row)
+        line=",".join(row)
+        n.write(line)
+    n.close()
 # checkLineLengths()
 # changePhoneNumbers()
 # formatCapitals()
-removeNewLine()
+# removeNewLine()
+delteRow(4)
