@@ -3,7 +3,6 @@
     "cust_fname",
     "cust_lname",
     "cust_email",
-    "cust_countrycode",
     "cust_mobile",
     "cust_addr1",
     "cust_postcode",
