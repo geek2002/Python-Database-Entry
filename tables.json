@@ -49,7 +49,7 @@
   ],
   "card":[
       "card_number",
-      "card_exipary",
+      "card_expiary",
       "card_cvv",
       "cust_id"
   ],
