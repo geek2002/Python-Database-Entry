@@ -9,7 +9,6 @@
     "cust_town"
   ],
   "supplier":[
-      "supply_id",
       "supply_name",
       "supply_number",
       "supply_addr1",
@@ -17,7 +16,6 @@
       "supply_postcode"
   ],
   "staff":[
-      "staff_id",
       "staff_fname",
       "staff_lname",
       "staff_email",
@@ -29,7 +27,6 @@
       "staff_town"
   ],
   "sale":[
-      "sale_id",
       "sale_time",
       "sale_date",
       "sale_value",
@@ -39,11 +36,9 @@
       "card_id"
   ],
   "catagory":[
-      "cata_id",
       "cata_name"
   ],
   "product":[
-    "prod_id",
     "prod_name",
     "prod_description",
     "prod_price",
@@ -53,14 +48,12 @@
     "supply_id"
   ],
   "card":[
-      "card_id",
       "card_number",
       "card_exipary",
       "card_cvv",
       "cust_id"
   ],
   "sale_product":[
-      "sale_product_id",
       "sale_id",
       "prod_id"
   ]  
