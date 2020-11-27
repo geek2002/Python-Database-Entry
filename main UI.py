@@ -29,7 +29,7 @@ def Menu():
         Menu()
     elif do == "3":
         clean() 
-        Menu()
+        generateCards(int(input("How Many? >> ")))
     elif do == "4":
         addTables()
     elif do == "5":
@@ -206,6 +206,26 @@ def testPypyodbc(databaseLocation):
         installModule("pypyodbc")
         testPypyodbc(databaseLocation)
     return functionality
+def generateCards(cards, customers, currentyear):
+    dictKey=6
+    months=[1,2,3,4,5,6,7,8,9,10,11,12]
+    while True:
+        cardNumber = random.randint(1111111111111111,9999999999999999)
+        if cardNumber in cardsUsed:
+            cardNumber = random.randint(1111111111111111,9999999999999999)
+        else:
+            break
+    cvv=random.randint(111,999)
+    expiary=[random.choice(months)]
+    if len(currentyear) > 2:
+        currentyear=currentyear[2:4]
+        currentyear=int(currentyear)
+    expiary.append(random.randint(currentyear,currentyear+10))
+    customer=random.randint(1,customers)
+    data=[cardNumber,cvv,"/".join(expiary),customer]
+    print(data)
+    # writeToDatabase(dictKey,data)
+
 
 databaseFile=getDatabaseLocation()
 functionality = testPyodbc(databaseFile)
