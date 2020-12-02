@@ -1,0 +1,16 @@
+#Pick random number of items
+
+#Get list of all staff members who is a checkout opperator
+#Pick random staff member to tag
+
+#Get List of all customers
+#Pick random customer to tag
+#Get list of cards from customer, if more than one pick random card to tag
+#Tag card to transaction
+
+Get list of all products and prices in dictionary
+Pick {x} ammount of products and add to list
+
+If an item is listed more than once then change to quantity when writing
+Write sale to sales table
+Write sale and products to sale_prod table
