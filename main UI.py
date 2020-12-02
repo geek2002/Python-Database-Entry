@@ -26,10 +26,10 @@ def Menu():
         addNames(int(input("How Many? >> ")))
     elif do == "2":
         clean()
-        Menu()
+        generateCards(int(input("How Many? >> ")),22,2020)
     elif do == "3":
         clean() 
-        generateCards(int(input("How Many? >> ")))
+        Menu()
     elif do == "4":
         addTables()
     elif do == "5":
@@ -45,6 +45,10 @@ def log(data):
     # file.close()
 def clean():
     os.system('cls' if os.name == 'nt' else 'clear')
+def convertList(inList):
+    for x in range(len(inList)):
+        inList[x] = str(inList[x])
+    return inList
 def loadJSON():
     with open('tables.json', 'r') as f:
         tables_dict = json.load(f)
@@ -209,22 +213,34 @@ def testPypyodbc(databaseLocation):
 def generateCards(cards, customers, currentyear):
     dictKey=6
     months=[1,2,3,4,5,6,7,8,9,10,11,12]
-    while True:
-        cardNumber = random.randint(1111111111111111,9999999999999999)
-        if cardNumber in cardsUsed:
+    z=0
+    for z in range(cards):
+        while True:
             cardNumber = random.randint(1111111111111111,9999999999999999)
-        else:
-            break
-    cvv=random.randint(111,999)
-    expiary=[random.choice(months)]
-    if len(currentyear) > 2:
-        currentyear=currentyear[2:4]
+            if cardNumber in cardsUsed:
+                cardNumber = random.randint(1111111111111111,9999999999999999)
+            else:
+                break
+        cvv=random.randint(111,999)
+        expiary=["1"]
+        expiary.append(str(random.choice(months)))
+        currentyear=str(currentyear)
+        if len(currentyear) > 2:
+            currentyear=currentyear[2:4]
+            currentyear=int(currentyear)
         currentyear=int(currentyear)
-    expiary.append(random.randint(currentyear,currentyear+10))
-    customer=random.randint(1,customers)
-    data=[cardNumber,cvv,"/".join(expiary),customer]
-    print(data)
-    # writeToDatabase(dictKey,data)
+        randomYear=random.randint((currentyear+1),(currentyear+11))
+        expiary.append("20" + str(randomYear))
+        customer=random.randint(1,customers)
+        expiary="/".join(expiary)
+        data=[str(cardNumber),"'" + expiary + "'",cvv, customer]
+        data=convertList(data)
+        print(data)
+        if z % 100 == True:
+            writeToDatabase(dictKey,data,True)
+        elif z != (cards-1):
+            writeToDatabase(dictKey,data)
+    writeToDatabase(dictKey,data,True)
 
 
 databaseFile=getDatabaseLocation()
