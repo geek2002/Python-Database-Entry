@@ -1,0 +1,10 @@
+INSERT INTO branch(bran_name, bran_location) VALUES('East Wellow','Wellow');
+INSERT INTO branch(bran_name, bran_location) VALUES('Meathop Town Centre','Meathop');
+INSERT INTO branch(bran_name, bran_location) VALUES('North Inverlussa','Inverlussa');
+INSERT INTO branch(bran_name, bran_location) VALUES('South Preston','Preston');
+INSERT INTO branch(bran_name, bran_location) VALUES('East Mepal','Mepal');
+INSERT INTO branch(bran_name, bran_location) VALUES('Reagill District','Reagill');
+INSERT INTO branch(bran_name, bran_location) VALUES('East Meddon','Meddon');
+INSERT INTO branch(bran_name, bran_location) VALUES('Heddle Branch','Heddle');
+INSERT INTO branch(bran_name, bran_location) VALUES('Uley District','Uley');
+INSERT INTO branch(bran_name, bran_location) VALUES('Walcot Town Centre','Walcot');
